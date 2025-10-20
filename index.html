@@ -1,0 +1,1923 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF Forensics - Complete Reference</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="hero-section">
+        <div class="matrix-bg"></div>
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-fingerprint"></i>
+                <span>CTF Forensics</span>
+            </div>
+            <div class="nav-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search for tools or commands...">
+            </div>
+        </nav>
+        
+        <div class="hero-content">
+            <h1 class="glitch" data-text="Complete CTF Forensics Reference">Complete CTF Forensics Reference</h1>
+            <p class="hero-subtitle">All the tools and commands you need in one place</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <i class="fas fa-tools"></i>
+                    <span class="stat-number">80+</span>
+                    <span class="stat-label">Tools</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-terminal"></i>
+                    <span class="stat-number">200+</span>
+                    <span class="stat-label">Commands</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-layer-group"></i>
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">Categories</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="general">
+                    <i class="fas fa-file-code"></i>
+                    <span>General Files</span>
+                </button>
+                <button class="tab-btn" data-tab="image">
+                    <i class="fas fa-image"></i>
+                    <span>Images</span>
+                </button>
+                <button class="tab-btn" data-tab="audio">
+                    <i class="fas fa-music"></i>
+                    <span>Audio/Video</span>
+                </button>
+                <button class="tab-btn" data-tab="memory">
+                    <i class="fas fa-memory"></i>
+                    <span>Memory</span>
+                </button>
+                <button class="tab-btn" data-tab="disk">
+                    <i class="fas fa-hdd"></i>
+                    <span>Disk</span>
+                </button>
+                <button class="tab-btn" data-tab="network">
+                    <i class="fas fa-network-wired"></i>
+                    <span>Network</span>
+                </button>
+                <button class="tab-btn" data-tab="stego">
+                    <i class="fas fa-eye-slash"></i>
+                    <span>Steganography</span>
+                </button>
+                <button class="tab-btn" data-tab="crypto">
+                    <i class="fas fa-lock"></i>
+                    <span>Cryptography</span>
+                </button>
+                <button class="tab-btn" data-tab="advanced">
+                    <i class="fas fa-rocket"></i>
+                    <span>Advanced</span>
+                </button>
+                <button class="tab-btn" data-tab="automation">
+                    <i class="fas fa-cogs"></i>
+                    <span>Automation</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="content-area">
+            <div class="tab-content active" id="general">
+                <div class="section-header">
+                    <h2><i class="fas fa-file-code"></i> General File Analysis</h2>
+                    <p>Essential tools for examining and analyzing any type of file</p>
+                </div>
+
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-file-alt"></i>
+                            <h3>file</h3>
+                        </div>
+                        <p class="tool-desc">Detect file type and structure</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>file suspect.bin</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>file -k suspect.bin</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Use -k flag for additional attempts at identification</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-align-left"></i>
+                            <h3>strings</h3>
+                        </div>
+                        <p class="tool-desc">Extract readable strings from binary files</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>strings -a -t x suspect.bin | less</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>strings -el suspect.bin</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>strings suspect.bin | grep -i flag</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-el for UTF-16 little-endian, -t x shows hex offset</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-hashtag"></i>
+                            <h3>xxd / hexdump</h3>
+                        </div>
+                        <p class="tool-desc">Display file content in hexadecimal format</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>xxd suspect.bin | less</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>xxd -ps file.bin | sed -n '1,200p' > part.hex</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>hexdump -C suspect.bin | less</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-ps for plain hex output, -C for canonical hex+ASCII</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-sitemap"></i>
+                            <h3>binwalk</h3>
+                        </div>
+                        <p class="tool-desc">Scan and extract embedded files</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>binwalk suspect.bin</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>binwalk -Me suspect.bin</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>binwalk --dd='.*' suspect.bin</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>binwalk --entropy --matlab file.bin</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-M recursive, -e extract, -E entropy analysis, --dd extracts everything</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h3>exiftool</h3>
+                        </div>
+                        <p class="tool-desc">View and analyze metadata</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>exiftool file.pdf</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>exiftool -a -u file.jpg</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>exiftool -all= -overwrite_original image.jpg</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-a shows duplicates, -u shows unknown tags, last command removes all metadata</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-cut"></i>
+                            <h3>dd</h3>
+                        </div>
+                        <p class="tool-desc">Extract specific parts of a file</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>dd if=file.bin of=carved.bin bs=1 skip=1024 count=2048</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>dd if=file.bin of=head.bin bs=1 skip=0 count=512</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>dd if=file.bin bs=1 | xxd</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>bs=block size, skip=bytes to skip, count=bytes to extract</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-search-plus"></i>
+                            <h3>bulk_extractor</h3>
+                        </div>
+                        <p class="tool-desc">Automatic extraction of sensitive information</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>bulk_extractor -o output_dir file.bin</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>bulk_extractor -e email -e url -o results file.bin</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Automatically extracts emails, URLs, credit cards, etc.</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-compress"></i>
+                            <h3>Archive Tools</h3>
+                        </div>
+                        <p class="tool-desc">Extract and analyze compressed files</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>unzip -l archive.zip</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>7z x archive.7z -pPASSWORD</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>tar -xvf archive.tar.gz</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>zipinfo -v suspicious.docx</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Office files (docx, xlsx) are ZIP archives - analyze them!</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-file-pdf"></i>
+                            <h3>PDF Analysis</h3>
+                        </div>
+                        <p class="tool-desc">Analyze PDF files for hidden content and malware</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>pdfinfo suspicious.pdf</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>pdfid.py suspicious.pdf</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>pdf-parser.py -a suspicious.pdf</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>pdf-parser.py --search '/EmbeddedFile' suspicious.pdf</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Check for JavaScript, embedded files, and suspicious objects</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-file-word"></i>
+                            <h3>Office Files</h3>
+                        </div>
+                        <p class="tool-desc">Analyze Microsoft Office documents</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>oledump.py suspicious.doc</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>zipinfo -v suspicious.docx</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>unzip suspicious.docx -d extracted/</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>OOXML files (docx, xlsx, pptx) are ZIP archives</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="image">
+                <div class="section-header">
+                    <h2><i class="fas fa-image"></i> Image Analysis (Stego + Metadata)</h2>
+                    <p>Specialized tools for discovering hidden data in images</p>
+                </div>
+
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-check-circle"></i>
+                            <h3>pngcheck / jpeginfo</h3>
+                        </div>
+                        <p class="tool-desc">Verify PNG/JPEG file integrity</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>pngcheck -v image.png</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>jpeginfo -c image.jpg</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Check for corrupted chunks and hidden data in PNG/JPEG</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-eye-slash"></i>
+                            <h3>steghide</h3>
+                        </div>
+                        <p class="tool-desc">Extract hidden data from images</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>steghide info image.jpg</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>steghide extract -sf image.jpg</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>steghide extract -sf image.jpg -p PASSWORD</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Supports JPG, BMP, WAV, AU files. Try empty password first!</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-ghost"></i>
+                            <h3>zsteg</h3>
+                        </div>
+                        <p class="tool-desc">Detect LSB steganography in PNG/BMP</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>zsteg -a image.png</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>zsteg -E 'LSB,LSB,LSB,RGB' image.png</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>zsteg image.png --bits 1 --order xy --channel rgb</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Best tool for PNG LSB analysis. -a runs all detection methods</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-key"></i>
+                            <h3>stegcracker</h3>
+                        </div>
+                        <p class="tool-desc">Brute force steghide passwords</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>stegcracker image.jpg /usr/share/wordlists/rockyou.txt</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>stegcracker image.jpg</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Automatically uses rockyou.txt if no wordlist specified</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-mask"></i>
+                            <h3>outguess</h3>
+                        </div>
+                        <p class="tool-desc">Extract data hidden with outguess method</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>outguess -r image.jpg output.txt</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>outguess -k "password" -r image.jpg output.txt</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-r for extraction, -k for password</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-magic"></i>
+                            <h3>stegoveritas</h3>
+                        </div>
+                        <p class="tool-desc">Comprehensive steganography analysis tool</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>stegoveritas image.png</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>stegoveritas -meta -imageTransform -colorMap image.png</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Runs multiple stego detection methods automatically</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-palette"></i>
+                            <h3>stegsolve</h3>
+                        </div>
+                        <p class="tool-desc">Analyze bit planes and color channels</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>stegsolve image.png</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>GUI tool - use arrow keys to cycle through bit planes</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-fill-drip"></i>
+                            <h3>ImageMagick</h3>
+                        </div>
+                        <p class="tool-desc">Advanced image manipulation and analysis</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>identify -verbose image.png</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>convert image.png -separate channel_%d.png</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>convert image.png -depth 8 -resize 200% out.png</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-separate splits RGB channels into separate images</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-qrcode"></i>
+                            <h3>zbarimg</h3>
+                        </div>
+                        <p class="tool-desc">Read QR codes and barcodes</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>zbarimg image.png</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>zbarimg --raw image.png</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Works with QR, EAN, UPC, Code128, and more</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="audio">
+                <div class="section-header">
+                    <h2><i class="fas fa-music"></i> Audio & Video Forensics</h2>
+                    <p>Tools for discovering hidden data in audio and video files</p>
+                </div>
+
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-film"></i>
+                            <h3>ffmpeg - Audio Extraction</h3>
+                        </div>
+                        <p class="tool-desc">Extract audio track from video</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>ffmpeg -i video.mp4 -vn -acodec copy audio.aac</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>ffmpeg -i video.mp4 -vn -acodec pcm_s16le audio.wav</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-vn disables video, use WAV format for further analysis</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-video"></i>
+                            <h3>ffmpeg - Frame Extraction</h3>
+                        </div>
+                        <p class="tool-desc">Extract frames from video</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>ffmpeg -i video.mp4 frames/out%04d.png</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>ffmpeg -i video.mp4 -qscale:v 2 frames/frame_%05d.jpg</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-qscale:v 2 sets high quality, analyze each frame for stego</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-wave-square"></i>
+                            <h3>sox - Spectrogram</h3>
+                        </div>
+                        <p class="tool-desc">Create spectrogram from audio</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>sox audio.wav -n spectrogram -o spectrogram.png</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>sox audio.wav -n spectrogram -o spectrogram.png -X 1024 -Y 768 -z 120</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>High-res spectrogram can reveal hidden text or images</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-headphones"></i>
+                            <h3>audacity</h3>
+                        </div>
+                        <p class="tool-desc">Manual audio and spectrogram analysis</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>audacity audio.wav</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Use View → Spectrogram to see visual hidden messages</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-info"></i>
+                            <h3>mediainfo</h3>
+                        </div>
+                        <p class="tool-desc">Display detailed media file information</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>mediainfo video.mp4</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>mediainfo --Full video.mp4</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Shows codec, bitrate, metadata, and hidden tracks</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-microchip"></i>
+                            <h3>LSB Audio Analysis</h3>
+                        </div>
+                        <p class="tool-desc">Extract LSB from audio</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>ffmpeg -i audio.wav -f s16le -acodec pcm_s16le audio.raw</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Convert to raw PCM for LSB stego analysis with custom scripts</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="memory">
+                <div class="section-header">
+                    <h2><i class="fas fa-memory"></i> Memory Forensics</h2>
+                    <p>Analyze RAM dumps and extract data from memory</p>
+                </div>
+
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-microchip"></i>
+                            <h3>volatility - Setup</h3>
+                        </div>
+                        <p class="tool-desc">Identify memory dump profile</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>volatility -f memory.dmp imageinfo</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>vol -f mem.dmp windows.info</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>First step - identify OS and build number for correct profile</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-list"></i>
+                            <h3>Process Analysis</h3>
+                        </div>
+                        <p class="tool-desc">List and analyze running processes</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>volatility -f mem.dmp --profile=Win7SP1x64 pslist</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>volatility -f mem.dmp --profile=PROFILE pstree</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>volatility -f mem.dmp --profile=PROFILE procdump -p PID -D ./procs</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>pstree shows parent-child relationships, procdump extracts executable</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-network-wired"></i>
+                            <h3>Network Connections</h3>
+                        </div>
+                        <p class="tool-desc">Display network activity</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>volatility -f mem.dmp --profile=PROFILE netscan</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>volatility -f mem.dmp --profile=PROFILE connections</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Look for suspicious IPs, ports, and established connections</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-file-alt"></i>
+                            <h3>File Extraction</h3>
+                        </div>
+                        <p class="tool-desc">Extract files from memory</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>volatility -f mem.dmp --profile=PROFILE filescan</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>volatility -f mem.dmp --profile=PROFILE dumpfiles -D ./dumps</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>filescan lists files, dumpfiles extracts them</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-key"></i>
+                            <h3>Password Extraction</h3>
+                        </div>
+                        <p class="tool-desc">Extract password hashes</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>volatility -f mem.dmp --profile=PROFILE hashdump</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>volatility -f mem.dmp --profile=PROFILE lsadump</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Extract NTLM hashes from SAM database in memory</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-terminal"></i>
+                            <h3>Command Line</h3>
+                        </div>
+                        <p class="tool-desc">View process command lines</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>volatility -f mem.dmp --profile=PROFILE cmdline</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>volatility -f mem.dmp --profile=PROFILE consoles</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>cmdline shows process arguments, consoles shows cmd.exe history</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-clipboard"></i>
+                            <h3>Clipboard & Browser</h3>
+                        </div>
+                        <p class="tool-desc">Extract clipboard and browser history</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>volatility -f mem.dmp --profile=PROFILE clipboard</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>volatility -f mem.dmp --profile=PROFILE iehistory</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>volatility -f mem.dmp --profile=PROFILE chromehistory</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Clipboard can contain passwords, flags, or sensitive data</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-bug"></i>
+                            <h3>Malware Detection</h3>
+                        </div>
+                        <p class="tool-desc">Detect hidden malware</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>volatility -f mem.dmp --profile=PROFILE malfind -D dumps/</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>strings procs/PID | grep -iE 'password|token|flag|key'</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>malfind detects injected code and hidden processes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="disk">
+                <div class="section-header">
+                    <h2><i class="fas fa-hdd"></i> Disk & Filesystem Forensics</h2>
+                    <p>Analyze disks and recover deleted files</p>
+                </div>
+
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-table"></i>
+                            <h3>Partition Analysis</h3>
+                        </div>
+                        <p class="tool-desc">View partition table</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>mmls disk.img</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>fdisk -l disk.img</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Note the offset (start sector) for mounting partitions</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-folder-open"></i>
+                            <h3>File Listing</h3>
+                        </div>
+                        <p class="tool-desc">List files in disk image</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>fls -r -o 63 disk.img | less</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>fls -rd -o 2048 disk.img</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-r recursive, -d deleted files, -o offset in sectors</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-file-export"></i>
+                            <h3>File Extraction</h3>
+                        </div>
+                        <p class="tool-desc">Extract specific file from disk</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>icat -o 63 disk.img 1234 > carved.file</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>icat -o 2048 disk.img 128 > recovered_file</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Use inode number from fls output to extract specific file</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-hdd"></i>
+                            <h3>Mounting Disk Images</h3>
+                        </div>
+                        <p class="tool-desc">Mount disk image for browsing</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>losetup -Pf disk.img</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>mount -o ro,loop,offset=$((2048*512)) disk.img /mnt/img</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>lsblk</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Always mount read-only (-o ro) to preserve evidence</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-recycle"></i>
+                            <h3>foremost</h3>
+                        </div>
+                        <p class="tool-desc">File carving - recover deleted files</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>foremost -i disk.img -o ./recovery</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>foremost -t jpg,png,pdf -i disk.img -o ./carved</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Carves files based on headers/footers, -t specifies file types</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-camera"></i>
+                            <h3>photorec</h3>
+                        </div>
+                        <p class="tool-desc">Recover images and files</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>photorec disk.img</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Interactive tool, excellent for recovering images</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-scissors"></i>
+                            <h3>scalpel</h3>
+                        </div>
+                        <p class="tool-desc">Advanced file carving</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>scalpel disk.img -o ./scalpel_out</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Configure /etc/scalpel/scalpel.conf for custom file types</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-desktop"></i>
+                            <h3>autopsy</h3>
+                        </div>
+                        <p class="tool-desc">GUI for disk analysis</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>autopsy</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Web-based GUI, excellent for comprehensive disk analysis</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-windows"></i>
+                            <h3>Windows Registry</h3>
+                        </div>
+                        <p class="tool-desc">Extract registry data</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>reglookup -p hivefile 'Software\Microsoft\Windows\CurrentVersion\Run'</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>strings NTUSER.DAT | grep -i 'password'</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Check Run keys for autostart programs and persistence</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="network">
+                <div class="section-header">
+                    <h2><i class="fas fa-network-wired"></i> Network Forensics (PCAP)</h2>
+                    <p>Analyze network packets and extract data</p>
+                </div>
+
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-fish"></i>
+                            <h3>wireshark</h3>
+                        </div>
+                        <p class="tool-desc">Network analysis with GUI</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>wireshark capture.pcap</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>File → Export Objects → HTTP/SMB to extract files</span>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Right-click packet → Follow → TCP Stream for full conversation</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-terminal"></i>
+                            <h3>tshark - Basic</h3>
+                        </div>
+                        <p class="tool-desc">Command-line wireshark</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>tshark -r capture.pcap -qz conv,tcp</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>tshark -r capture.pcap -V > capture.txt</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-V for verbose output, -q for quiet, -z for statistics</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-filter"></i>
+                            <h3>tshark - Filtering</h3>
+                        </div>
+                        <p class="tool-desc">Extract specific protocols</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>tshark -r capture.pcap -Y "http.request or smtp" -T fields -e ip.src -e ip.dst -e http.host -e http.request.uri</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>tshark -r capture.pcap -Y 'ftp-data' -T fields -e data</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-Y for display filter, -T fields to specify output fields</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-stream"></i>
+                            <h3>tshark - TCP Stream</h3>
+                        </div>
+                        <p class="tool-desc">Follow TCP conversations</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>tshark -r capture.pcap -z follow,tcp,ascii,1</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>tshark -r capture.pcap -z follow,tcp,hex,0</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Last number is stream index (0, 1, 2...). Use ascii or hex format</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-download"></i>
+                            <h3>tcpdump</h3>
+                        </div>
+                        <p class="tool-desc">Read and display PCAP files</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>tcpdump -nn -r capture.pcap</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>tcpdump -nn -r capture.pcap 'port 80'</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-nn disables name resolution for faster output</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-layer-group"></i>
+                            <h3>Wireshark Filters</h3>
+                        </div>
+                        <p class="tool-desc">Useful Wireshark display filters</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>http contains "flag"</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>http.request.method == "POST"</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>tcp.stream eq 0</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>dns.qry.name contains "suspicious"</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Use contains for text search, == for exact match</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-water"></i>
+                            <h3>tcpflow</h3>
+                        </div>
+                        <p class="tool-desc">Extract TCP streams automatically</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>tcpflow -r capture.pcap -o output_dir</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>tcpflow -r capture.pcap -C -g</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Creates separate file for each TCP stream</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-project-diagram"></i>
+                            <h3>NetworkMiner</h3>
+                        </div>
+                        <p class="tool-desc">PCAP analysis with GUI</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>NetworkMiner capture.pcap</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Automatically extracts files, credentials, and hosts</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-search"></i>
+                            <h3>ngrep</h3>
+                        </div>
+                        <p class="tool-desc">Network grep</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>ngrep -I capture.pcap "flag"</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>ngrep -I capture.pcap -q "POST"</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-I for pcap file, -q for quiet (less output)</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-code"></i>
+                            <h3>scapy</h3>
+                        </div>
+                        <p class="tool-desc">Packet manipulation with Python</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>scapy</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>packets = rdpcap('capture.pcap')</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>for pkt in packets: print(pkt.summary())</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Powerful Python library for packet analysis and crafting</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="stego">
+                <div class="section-header">
+                    <h2><i class="fas fa-eye-slash"></i> Advanced Steganography</h2>
+                    <p>Advanced techniques for hiding and extracting data</p>
+                </div>
+
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-layer-group"></i>
+                            <h3>LSB Extraction</h3>
+                        </div>
+                        <p class="tool-desc">Least Significant Bit extraction</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>zsteg -a image.png</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>stegsolve image.png</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>LSB hides data in least significant bits of pixels</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-snowflake"></i>
+                            <h3>snow</h3>
+                        </div>
+                        <p class="tool-desc">Whitespace steganography</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>snow -C -p password stegfile.txt</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>snow -C stegfile.txt</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Hides data in whitespace (tabs/spaces) in text files</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-archive"></i>
+                            <h3>Archive in Image</h3>
+                        </div>
+                        <p class="tool-desc">Embedded archives in images</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>binwalk -e suspicious.png</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>unzip image.png</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>grep -aob $'\x50\x4b\x03\x04' file.bin</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Look for ZIP signature PK (50 4B 03 04) in hex</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Audio Spectrogram</h3>
+                        </div>
+                        <p class="tool-desc">Hidden messages in audio</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>sox audio.wav -n spectrogram -o spec.png</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>sox audio.wav -n spectrogram -o spec.png -X 1024 -Y 768 -z 120</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Messages can be encoded visually in frequency spectrum</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-fingerprint"></i>
+                            <h3>YARA Rules</h3>
+                        </div>
+                        <p class="tool-desc">Pattern matching and IOC search</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>yara -r rules.yar /extracted_dir</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>yara -s rules.yar disk.img</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-r for recursive, -s shows matched strings</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="crypto">
+                <div class="section-header">
+                    <h2><i class="fas fa-lock"></i> Cryptography & Hashes</h2>
+                    <p>Crack encryption and break hashes</p>
+                </div>
+
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-hashtag"></i>
+                            <h3>hashcat</h3>
+                        </div>
+                        <p class="tool-desc">GPU hash cracking</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>hashcat -m 0 -a 0 hash.txt wordlist.txt</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>hashcat -m 1000 hash.txt rockyou.txt</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>hashcat -m 0 -a 0 --status --status-timer=10 hash.txt wordlist.txt</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-m 0 for MD5, -m 1000 for NTLM, -a 0 for dictionary attack</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-user-secret"></i>
+                            <h3>john</h3>
+                        </div>
+                        <p class="tool-desc">John the Ripper password cracker</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>john --show hashes.txt</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>--show displays cracked passwords</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-search"></i>
+                            <h3>hash-identifier</h3>
+                        </div>
+                        <p class="tool-desc">Identify hash type</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>hashid hash.txt</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>hash-identifier</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Essential first step before cracking</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>openssl</h3>
+                        </div>
+                        <p class="tool-desc">Decrypt and verify</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>openssl enc -d -aes-256-cbc -in secret.enc -out secret.txt -k password</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>openssl base64 -d -in file.b64 -out file.bin</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>openssl rsa -in private.pem -text -noout</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-d for decrypt, -k for password</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-calculator"></i>
+                            <h3>CyberChef</h3>
+                        </div>
+                        <p class="tool-desc">The Cyber Swiss Army Knife</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>https://gchq.github.io/CyberChef/</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>300+ operations: Base64, Hex, ROT13, XOR, AES, and more!</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-font"></i>
+                            <h3>Base64 & Encoding</h3>
+                        </div>
+                        <p class="tool-desc">Decode/Encode Base64 and Hex</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>echo "ZmxhZ3tjdGZ9" | base64 -d</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>cat file.txt | base64</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>echo "48656c6c6f" | xxd -r -p</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-d for decode, -p for plain hex</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-sync-alt"></i>
+                            <h3>ROT13 / Caesar</h3>
+                        </div>
+                        <p class="tool-desc">Decode ROT and Caesar cipher</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>echo "synt" | tr 'A-Za-z' 'N-ZA-Mn-za-m'</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>cat encrypted.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>ROT13 is Caesar cipher with shift of 13</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-fingerprint"></i>
+                            <h3>MD5 / SHA Hashes</h3>
+                        </div>
+                        <p class="tool-desc">Calculate and verify hashes</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>echo -n "text" | md5sum</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>echo -n "text" | sha256sum</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>md5sum file.bin</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-n prevents newline from being added to hash</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-file-archive"></i>
+                            <h3>zip2john / rar2john</h3>
+                        </div>
+                        <p class="tool-desc">Crack archive passwords</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>zip2john file.zip > hash.txt</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>john hash.txt --wordlist=rockyou.txt</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>rar2john file.rar > rar_hash.txt</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Also works with: pdf2john, ssh2john, office2john</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-exchange-alt"></i>
+                            <h3>XOR Analysis</h3>
+                        </div>
+                        <p class="tool-desc">Analyze and decrypt XOR encryption</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>python3 -c "data=open('file.bin','rb').read(); print(bytes([b^0x42 for b in data]))"</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>xortool encrypted_file</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>xortool can brute-force XOR key length and key</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="advanced">
+                <div class="section-header">
+                    <h2><i class="fas fa-rocket"></i> Advanced Techniques</h2>
+                    <p>Expert-level forensics commands and tricks</p>
+                </div>
+
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-chart-area"></i>
+                            <h3>Entropy Analysis</h3>
+                        </div>
+                        <p class="tool-desc">Detect encrypted/packed regions</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>binwalk --entropy --matlab file.bin</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>binwalk -E file.bin</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>High entropy regions often indicate encryption or compression</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-file-archive"></i>
+                            <h3>Hidden ZIP Detection</h3>
+                        </div>
+                        <p class="tool-desc">Find hidden archives by signature</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>grep -aob $'\x50\x4b\x03\x04' file.bin</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>for o in $(grep -aob $'\x50\x4b\x03\x04' file.bin | cut -d: -f1); do dd if=file.bin bs=1 skip=$o | unzip -l -; done</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>PK signature (50 4B 03 04) marks ZIP file start</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-search"></i>
+                            <h3>Advanced Grep Patterns</h3>
+                        </div>
+                        <p class="tool-desc">Extract specific data patterns</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>grep -R --line-number -iE 'flag|secret|pass|token|api_key|authorization' ./</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' capture.txt | sort -u</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>grep -oE 'https?://[^"'"' ]+' file | sort -u</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-o shows only matching part, -E for extended regex</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-text-width"></i>
+                            <h3>Multi-Encoding Strings</h3>
+                        </div>
+                        <p class="tool-desc">Extract strings in various encodings</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>( strings -el file; strings -e l file ) | sort -u</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>strings -a -t x -e l suspect.bin | less</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>-el for UTF-16LE, -e l for 16-bit littleendian</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-hard-hat"></i>
+                            <h3>Partial File Reconstruction</h3>
+                        </div>
+                        <p class="tool-desc">Extract and rebuild partial files</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>dd if=file.bin of=head.bin bs=1 skip=0 count=512</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>dd if=file.bin of=tail.bin bs=1 skip=$((`stat -c%s file.bin`-512)) count=512</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Useful for corrupted files or carved data</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-file-medical"></i>
+                            <h3>File Signature Analysis</h3>
+                        </div>
+                        <p class="tool-desc">Check file headers and magic numbers</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>xxd -l 16 file.bin</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>file -k suspect.bin</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>PNG: 89 50 4E 47, JPEG: FF D8 FF, PDF: 25 50 44 46</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="automation">
+                <div class="section-header">
+                    <h2><i class="fas fa-cogs"></i> Automation & Quick Wins</h2>
+                    <p>One-liners and scripts for rapid analysis</p>
+                </div>
+
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-fast-forward"></i>
+                            <h3>Multi-Tool Analysis</h3>
+                        </div>
+                        <p class="tool-desc">Run multiple tools on one file</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>for tool in file exiftool binwalk strings; do echo "=== $tool ==="; $tool suspect; done</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Quick initial analysis with multiple tools</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-magic"></i>
+                            <h3>Quick Strings Dump</h3>
+                        </div>
+                        <p class="tool-desc">Extract all strings quickly</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>strings -n 6 "$F" | head -n 50</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>( strings -el file; strings -e l file ) | sort -u</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Combines UTF-8 and UTF-16 strings</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-network-wired"></i>
+                            <h3>PCAP to Text</h3>
+                        </div>
+                        <p class="tool-desc">Convert PCAP for grep analysis</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>tshark -r capture.pcap -V > capture.txt</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>tcpdump -A -r capture.pcap > capture_ascii.txt</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Now you can use grep to search packet content</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-terminal"></i>
+                            <h3>Quick Analysis Script</h3>
+                        </div>
+                        <p class="tool-desc">Bash script for first look</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>#!/bin/bash
+F="$1"
+file "$F"
+exiftool "$F"
+binwalk -e "$F"
+strings -n 6 "$F" | head -n 50</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Save as analyze.sh, chmod +x analyze.sh, run ./analyze.sh file</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <i class="fas fa-bolt"></i>
+                            <h3>Quick Wins Checklist</h3>
+                        </div>
+                        <p class="tool-desc">First 5 minutes of any challenge</p>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>file suspicious_file</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>strings suspicious_file | grep -i flag</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>exiftool suspicious_file</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>binwalk -e suspicious_file</code>
+                        </div>
+                        <div class="note-box">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>These 4 commands solve ~30% of CTF forensics challenges!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-reference">
+            <div class="section-header">
+                <h2><i class="fas fa-bolt"></i> Quick Analysis Workflow</h2>
+                <p>Initial examination steps for any suspicious file</p>
+            </div>
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Identify File Type</h3>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>file suspicious_file</code>
+                        </div>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>file -k suspicious_file</code>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Extract Strings</h3>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>strings -n 6 suspicious_file | grep -i flag</code>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Check Metadata</h3>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>exiftool suspicious_file</code>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Find Embedded Files</h3>
+                        <div class="command-box">
+                            <button class="copy-btn" onclick="copyCommand(this)"><i class="fas fa-copy"></i></button>
+                            <code>binwalk -e suspicious_file</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="motivational-quote">
+                <i class="fas fa-quote-left"></i>
+                <p class="quote-text">"The only way to do great work is to love what you do. Keep hacking, keep learning, never stop exploring."</p>
+                <i class="fas fa-quote-right"></i>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="social-links">
+                <h3>Connect With Me</h3>
+                <div class="social-icons">
+                    <a href="https://github.com/adce626" target="_blank" rel="noopener noreferrer" class="social-link">
+                        <i class="fab fa-github"></i>
+                        <span>@adce626</span>
+                    </a>
+                    <a href="https://x.com/adce626" target="_blank" rel="noopener noreferrer" class="social-link">
+                        <i class="fab fa-x-twitter"></i>
+                        <span>@adce626</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <p><i class="fas fa-code"></i> Made with <span class="heart">♥</span> for the CTF Community</p>
+            <p class="footer-note">All tools and commands are for educational purposes only</p>
+            <p class="footer-version">v2.0 - Comprehensive Edition</p>
+        </div>
+    </footer>
+
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span>Command copied successfully!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
